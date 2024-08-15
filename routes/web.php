@@ -15,4 +15,4 @@ Route::get('/', [WelcomeController::class,'welcome'])->name('welcome');
 //Route::delete('/note/{id}', [NoteController::class,'destroy'])->name('note.destroy');
 
 // 7 lines in 1 line
-Route::resource('note',NoteController::class);
+Route::resource('notes',NoteController::class);

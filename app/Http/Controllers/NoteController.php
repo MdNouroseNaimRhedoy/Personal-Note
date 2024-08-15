@@ -29,7 +29,14 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'note'=>[ 'required','string']
+        ]);
+
+        $data['user_id'] = 1;
+        $note = Note::create($data);
+
+        return to_route('notes.show', $note->id)->with('message','Note is created');
     }
 
     /**
@@ -37,7 +44,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        return view('note.show',['note => $note']);
+        return view('note.show',['note' => $note]);
     }
 
     /**
@@ -45,7 +52,7 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        return view('note.edit',['note => $note']);
+        return view('note.edit',['note' => $note]);
     }
 
     /**
@@ -53,7 +60,12 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        //
+        $data = $request->validate([
+            'note'=>[ 'required','string']
+        ]);
+        $note->update($data);
+
+        return to_route('notes.show', $note)->with('message','Note is updated');
     }
 
     /**
@@ -61,6 +73,8 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        $note->delete();
+        return to_route('notes.index')->with('message','Note is deleted');
+
     }
 }
