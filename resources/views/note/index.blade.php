@@ -1,5 +1,5 @@
-<x-layout>
-    <div class="note-container">
+<x-app-layout>
+    <div class="note-container py-12">
         <a href="{{route('notes.create')}}" class="new-note-btn" >
             New Note
         </a>
@@ -20,7 +20,10 @@
                     </div>
                 </div>  
             @endforeach
+            <div class="p-6">
+                {{$notes->links()}}
+            </div>
             
         </div>
     </div>
-</x-layout >
+</x-app-layout >
